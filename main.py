@@ -12,9 +12,9 @@ from views.visit_views import router as visit_router
 
 app = FastAPI()
 app.include_router(event_router)
+app.include_router(employee_router)
 app.include_router(biometrics_router)
 app.include_router(department_router)
-app.include_router(employee_router)
 app.include_router(invitation_router)
 app.include_router(position_router)
 app.include_router(visit_mark_router)

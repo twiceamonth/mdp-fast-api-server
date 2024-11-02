@@ -1,14 +1,17 @@
-from fastapi import APIRouter, Body, UploadFile, File
-from pydantic import BaseModel
+from typing import List
+
+from fastapi import APIRouter, UploadFile, File
+
+from models import VisitMarkResponse
 
 router = APIRouter(tags=["Временные отметки о посещении"])
 
 @router.get("/visit-marks")
-def get_visit_marks_list_for_visit(visit_id: str):
+def get_visit_marks_list_for_visit(visit_id: str) -> List[VisitMarkResponse]:
     return []
 
 @router.post("/visit-mark")
-def create_visit_mark(visitmark: BaseModel = Body(), file: UploadFile = File()):
+def create_visit_mark(visit_id: str, file: UploadFile = File()):
     return {}
 
 @router.delete("/visitmarks/{mark_id}")

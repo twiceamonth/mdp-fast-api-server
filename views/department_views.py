@@ -1,20 +1,27 @@
-from fastapi import APIRouter, Body
-from pydantic import BaseModel
+from typing import List
+
+from fastapi import APIRouter
+
+from models import DepartmentResponse, Department
 
 router = APIRouter(tags=["Отделы"])
 
+
 @router.get("/departments")
-def get_departments_list():
+def get_departments_list() -> List[DepartmentResponse]:
     return []
 
+
 @router.post("/department")
-def create_department(department: BaseModel = Body()):
+def create_department(department: Department):
     return {}
+
 
 @router.delete("/department/{department_id}")
 def delete_department(department_id: str):
     return []
 
-@router.put("/department/{department_id}")
-def update_department(department_id: str, new_department: BaseModel = Body()):
+
+@router.patch("/department/{department_id}")
+def update_department(department_id: str, new_department: Department):
     return {}

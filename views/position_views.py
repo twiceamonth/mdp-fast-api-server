@@ -1,20 +1,23 @@
-from fastapi import APIRouter, Body
-from pydantic import BaseModel
+from typing import List
+
+from fastapi import APIRouter
+
+from models import PositionResponse, Position
 
 router = APIRouter(tags=["Должности"])
 
 @router.get("/positions")
-def get_positions_list():
+def get_positions_list() -> List[PositionResponse]:
     return []
 
 @router.post("/position")
-def create_position(position: BaseModel = Body()):
+def create_position(position: Position):
     return {}
 
 @router.delete("/position/{position_id}")
 def delete_position(position_id: str):
     return []
 
-@router.put("/position/{position_id}")
-def update_position(position_id: str, new_position: BaseModel = Body()):
+@router.patch("/position/{position_id}")
+def update_position(position_id: str, new_position: Position):
     return {}

@@ -1,16 +1,19 @@
-from fastapi import APIRouter, Body
-from pydantic import BaseModel
+from typing import List
+
+from fastapi import APIRouter
+
+from models import InvitationResponse
 
 router = APIRouter(tags=["Приглашения"])
 
 @router.get("/invitations")
-def get_invitations_list_for_event(event_id: str):
+def get_invitations_list_for_event(event_id: str) -> List[InvitationResponse]:
     return []
 
 @router.post("/invitation")
-def create_invitation(invitation: BaseModel = Body()):
+def create_invitation(invitation: InvitationResponse):
     return {}
 
-@router.delete("/invitations/{employee_id}/{event_id}")
-def delete_invitation(employee_id: str,event_id: str):
+@router.delete("/invitations/delete")
+def delete_invitation(invitation: InvitationResponse):
     return []
