@@ -14,8 +14,8 @@ def get_events_list() -> List[EventResponse]:
 def get_event_by_id(event_id: str) -> Event:
     return {}
 
-@router.get("/download-event-video")
-def download_event_video():
+@router.get("/download-event-video/{event_id}")
+def download_event_video(event_id: str):
     return {}
 
 @router.post("/event")
@@ -23,7 +23,7 @@ def create_event(event: Event):
     return {}
 
 @router.post("/upload-event-video")
-def upload_event_video(video: UploadFile = File()):
+def upload_event_video(event_id: str, video: UploadFile = File()):
     return {}
 
 @router.delete("/event/{event_id}")

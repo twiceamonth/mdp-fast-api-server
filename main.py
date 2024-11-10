@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
+from starlette.staticfiles import StaticFiles
 
 from views.event.event_views import router as event_router
 from views.biometrics.biometrics_views import router as biometrics_router
@@ -11,6 +12,11 @@ from views.visit_mark.visit_mark_views import router as visit_mark_router
 from views.visit.visit_views import router as visit_router
 
 app = FastAPI()
+
+app.mount("/biometrics", StaticFiles(directory="biometrics"), name="biometrics")
+app.mount("/photos", StaticFiles(directory="photos"), name="photos")
+app.mount("/videos", StaticFiles(directory="videos"), name="videos")
+
 app.include_router(event_router)
 app.include_router(employee_router)
 app.include_router(biometrics_router)

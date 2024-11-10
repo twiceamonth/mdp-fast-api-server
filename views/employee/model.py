@@ -20,4 +20,3 @@ class Employee(BaseModel):
     patronymic: str | None = None
     position: str
     department: str
-    employee_photo: str

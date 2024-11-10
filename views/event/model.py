@@ -9,7 +9,6 @@ class Event(BaseModel):
     start_time: time
     end_time: time
     description: str
-    event_video: str | None = None
 
 class EventResponse(BaseModel):
     event_id: str
