@@ -1,0 +1,8 @@
+from pydantic_settings import BaseSettings
+
+
+class Settings(BaseSettings):
+    db_url: str = "postgresql://postgres:12345@localhost:5432/postgres"
+
+
+settings = Settings()

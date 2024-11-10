@@ -1,35 +1,56 @@
 from typing import List
 
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, HTTPException, status
+from starlette.responses import FileResponse
 
-from views.event.model import Event, EventResponse
+from db.base import check_uuid
+from db.db_connection import session as db
+from views.event.crud import *
+from views.event.model import Event, EventResponse, EventPatch
 
 router = APIRouter(tags=["Мероприятия"])
 
-@router.get("/events")
+
+@router.get("/events", response_model=List[EventResponse])
 def get_events_list() -> List[EventResponse]:
-    return []
+    return get_event_list(db)
 
-@router.get("/events/{event_id}")
-def get_event_by_id(event_id: str) -> Event:
-    return {}
 
-@router.get("/download-event-video/{event_id}")
-def download_event_video(event_id: str):
-    return {}
+@router.get("/events/{event_id}", response_model=EventResponse)
+def get_event_by_id(event_id: str) -> EventResponse:
+    check_uuid(event_id)
+    event = get_event(db, event_id)
+    if event is not None:
+        return event
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Мероприятие с id {event_id} не найдено!",
+    )
 
-@router.post("/event")
+
+@router.post("/event", response_model=EventResponse)
 def create_event(event: Event):
-    return {}
+    return create_event_post(db, event)
 
-@router.post("/upload-event-video")
-def upload_event_video(event_id: str, video: UploadFile = File()):
-    return {}
 
 @router.delete("/event/{event_id}")
 def delete_event(event_id: str):
-    return {}
+    check_uuid(event_id)
+    delete(db, event_id)
+    return {"details": "Success"}
 
-@router.patch("/event/{event_id}")
-def update_event(event_id: str, new_event: Event):
-    return {}
+
+@router.patch("/event/{event_id}", response_model=EventResponse)
+def update_event(event_id: str, new_event: EventPatch):
+    check_uuid(event_id)
+    return update_event_patch(db, event_id, new_event)
+
+
+@router.post("/upload-event-video/{event_id}")
+def upload_event_video(event_id: str, video: UploadFile = File()):
+    return upload_video(db, event_id, video)
+
+
+@router.get("/download-event-video/{event_id}")
+def download_event_video(event_id: str):
+    return download_video(db, event_id)

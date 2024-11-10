@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 import uvicorn
+from sqlalchemy.orm import Session
 from starlette.staticfiles import StaticFiles
 
+from db.db_connection import engine
 from views.event.event_views import router as event_router
 from views.biometrics.biometrics_views import router as biometrics_router
 from views.department.department_views import router as department_router
@@ -27,5 +29,5 @@ app.include_router(visit_mark_router)
 app.include_router(visit_router)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     uvicorn.run("main:app", reload=True)
