@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from models import PositionResponse, Position
+from model import PositionResponse, Position
 
 router = APIRouter(tags=["Должности"])
 

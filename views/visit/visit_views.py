@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from models import VisitResponse, Visit
+from model import VisitResponse, Visit
 
 router = APIRouter(tags=["Посещения мероприятий"])
 

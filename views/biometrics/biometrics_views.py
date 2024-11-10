@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, UploadFile, File
 
-from models import BiometricsResponse
+from model import BiometricsResponse
 
 router = APIRouter(tags=["Биометрия"])
 

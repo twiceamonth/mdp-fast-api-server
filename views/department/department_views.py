@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from models import DepartmentResponse, Department
+from model import DepartmentResponse, Department
 
 router = APIRouter(tags=["Отделы"])
 

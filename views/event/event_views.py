@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from models import EventResponse, Event
+from model import EventResponse, Event
 
 router = APIRouter(tags=["Мероприятия"])
 

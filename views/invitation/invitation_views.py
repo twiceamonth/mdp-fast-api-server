@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from models import InvitationResponse
+from model import InvitationResponse
 
 router = APIRouter(tags=["Приглашения"])
 
