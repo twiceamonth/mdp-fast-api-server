@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
 
 from model import Employee, EmployeeResponse
 
@@ -15,7 +15,7 @@ def get_employee_by_id(employee_id: str) -> EmployeeResponse:
     return {}
 
 @router.post("/employee")
-def create_employee(employee: Employee):
+def create_employee(employee: Employee, photo: UploadFile = File()):
     return {}
 
 @router.delete("/employee/{employee_id}")
@@ -23,5 +23,5 @@ def delete_employee(employee_id: str):
     return {}
 
 @router.patch("/employee/{employee_id}")
-def update_employee(employee_id: str, new_employee: Employee):
+def update_employee(employee_id: str, new_employee: Employee, photo: UploadFile = File()):
     return {}

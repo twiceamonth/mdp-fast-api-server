@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
 
 from model import EventResponse, Event
 
@@ -14,8 +14,16 @@ def get_events_list() -> List[EventResponse]:
 def get_event_by_id(event_id: str) -> Event:
     return {}
 
+@router.get("/download-event-video")
+def download_event_video():
+    return {}
+
 @router.post("/event")
 def create_event(event: Event):
+    return {}
+
+@router.post("/upload-event-video")
+def upload_event_video(video: UploadFile = File()):
     return {}
 
 @router.delete("/event/{event_id}")
