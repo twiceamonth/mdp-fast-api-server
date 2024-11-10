@@ -1,7 +1,8 @@
 from typing import List
 
 from fastapi import APIRouter, UploadFile, File
-from model import VisitMarkResponse
+
+from views.visit_mark.model import VisitMarkResponse
 
 router = APIRouter(tags=["Временные отметки о посещении"])
 

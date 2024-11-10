@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, UploadFile, File
 
-from model import Employee, EmployeeResponse
+from views.employee.model import EmployeeResponse, Employee
 
 router = APIRouter(tags=["Сотрудники"])
 

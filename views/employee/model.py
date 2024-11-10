@@ -1,7 +1,8 @@
 from pydantic import BaseModel
 
-from models import PositionResponse
+
 from views.department.model import DepartmentResponse
+from views.position.model import PositionResponse
 
 
 class EmployeeResponse(BaseModel):

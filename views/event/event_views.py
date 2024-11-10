@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, UploadFile, File
 
-from model import EventResponse, Event
+from views.event.model import Event, EventResponse
 
 router = APIRouter(tags=["Мероприятия"])
 
