@@ -72,12 +72,13 @@ def upload_video(session: Session, event_id: str, video: UploadFile = File()):
     event = get_event(session, event_id)
     if event is not None:
         ext = video.filename.split(".")[-1]
-        path = f"videos/{event_id}.{ext}"
+        path = f"static_files/videos/{event_id}.{ext}"
+        response_path = f"videos-static/{event_id}.{ext}"
         contents = video.file.read()
         with open(path, "wb") as f:
             f.write(contents)
         video.file.close()
-        update_event_patch(session, event_id, EventPatch(event_video=path))
+        update_event_patch(session, event_id, EventPatch(event_video=response_path))
         session.commit()
         return event
     raise HTTPException(
@@ -88,7 +89,7 @@ def upload_video(session: Session, event_id: str, video: UploadFile = File()):
 
 def download_video(session: Session, event_id: str):
     check_uuid(event_id)
-    for file in os.listdir("src/app/static_files/videos"):
+    for file in os.listdir("static_files/videos"):
         file_name, file_extension = file.split(".")
         if file_name == event_id:
             return FileResponse(

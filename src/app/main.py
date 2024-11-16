@@ -13,9 +13,9 @@ from src.app.views.visit.visit_views import router as visit_router
 
 app = FastAPI()
 
-app.mount("/biometrics", StaticFiles(directory="src/app/static_files/biometrics"), name="biometrics")
-app.mount("/photos", StaticFiles(directory="src/app/static_files/photos"), name="photos")
-app.mount("/videos", StaticFiles(directory="src/app/static_files/videos"), name="videos")
+app.mount("/biometrics-static", StaticFiles(directory="src/app/static_files/biometrics"), name="biometrics")
+app.mount("/photos-static", StaticFiles(directory="src/app/static_files/photos"), name="photos")
+app.mount("/videos-static", StaticFiles(directory="src/app/static_files/videos"), name="videos")
 
 app.include_router(event_router)
 app.include_router(employee_router)

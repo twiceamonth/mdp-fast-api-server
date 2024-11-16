@@ -1,6 +1,8 @@
 from sqlalchemy import Column, ForeignKey, text, UUID, String, Text
 from sqlalchemy.orm import relationship
 
+from app.db.models.department import DepartmentDTO
+from app.db.models.position import PositionDTO
 from src.app.db.base import Base
 
 
@@ -17,10 +19,10 @@ class EmployeeDTO(Base):
     second_name = Column(String(100))
     patronymic = Column(String(100), nullable=True)
     employee_photo = Column(Text)
-    department_id = Column(ForeignKey("Department.department_id"), nullable=False)
-    position_id = Column(ForeignKey("Position.position_id"), nullable=False)
+    department_id = Column(ForeignKey(DepartmentDTO.department_id), nullable=False)
+    position_id = Column(ForeignKey(PositionDTO.position_id), nullable=False)
 
-    position = relationship("Position")
+    #position = relationship("Position")
     # , primaryjoin="Employee.position_id == Position.position_id"
-    department = relationship("Department")
+    #department = relationship("Department")
     # , primaryjoin="Employee.department_id == Department.department_id"

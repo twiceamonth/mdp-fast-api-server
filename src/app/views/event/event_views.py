@@ -34,7 +34,7 @@ def update_event(event_id: str, new_event: EventPatch):
     return update_event_patch(db, event_id, new_event)
 
 
-@router.post("/upload-event-video/{event_id}")
+@router.post("/upload-event-video/{event_id}", response_model=EventResponse)
 def upload_event_video(event_id: str, video: UploadFile = File()):
     return upload_video(db, event_id, video)
 
