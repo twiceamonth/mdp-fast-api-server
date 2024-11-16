@@ -1,5 +1,4 @@
-from click import UUID
-from sqlalchemy import Column, text, Text
+from sqlalchemy import Column, text, Text, UUID
 
 from src.app.db.base import Base
 
