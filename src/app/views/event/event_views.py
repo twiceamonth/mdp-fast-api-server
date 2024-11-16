@@ -16,14 +16,7 @@ def get_events_list() -> List[EventResponse]:
 
 @router.get("/events/{event_id}", response_model=EventResponse)
 def get_event_by_id(event_id: str) -> EventResponse:
-    check_uuid(event_id)
-    event = get_event(db, event_id)
-    if event is not None:
-        return event
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Мероприятие с id {event_id} не найдено!",
-    )
+    return get_event(db, event_id)
 
 
 @router.post("/event", response_model=EventResponse)
@@ -33,14 +26,11 @@ def create_event(event: Event):
 
 @router.delete("/event/{event_id}")
 def delete_event(event_id: str):
-    check_uuid(event_id)
-    delete(db, event_id)
-    return {"details": "Success"}
+    return delete(db, event_id)
 
 
 @router.patch("/event/{event_id}", response_model=EventResponse)
 def update_event(event_id: str, new_event: EventPatch):
-    check_uuid(event_id)
     return update_event_patch(db, event_id, new_event)
 
 

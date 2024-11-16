@@ -1,6 +1,6 @@
 import os
 
-from fastapi import HTTPException, UploadFile, File
+from fastapi import HTTPException, UploadFile, File, status
 from sqlalchemy import select, Result
 from sqlalchemy.orm import Session
 from starlette.responses import FileResponse
@@ -19,12 +19,20 @@ def get_event_list(session: Session) -> list[EventResponse]:
 
 
 def get_event(session: Session, event_id: str) -> EventResponse | None:
-    return session.get(EventDTO, event_id)
+    check_uuid(event_id)
+    event = session.get(EventDTO, event_id)
+    if event is not None:
+        return event
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Мероприятие с id {event_id} не найдено!",
+    )
 
 
 def update_event_patch(
     session: Session, event_id: str, new_event: EventPatch
 ) -> EventResponse:
+    check_uuid(event_id)
     new_event.model_dump(exclude_unset=True)
     old_event = get_event(session, event_id)
     if old_event is not None:
@@ -38,12 +46,13 @@ def update_event_patch(
     )
 
 
-def delete(session: Session, event_id: str) -> None:
+def delete(session: Session, event_id: str):
+    check_uuid(event_id)
     event = get_event(session, event_id)
     if event is not None:
         session.delete(event)
         session.commit()
-        return
+        return { "message" : "Success" }
     raise HTTPException(
         status_code=HTTP_404_NOT_FOUND,
         detail=f"Мероприятия с id {event_id} не найдено!",
