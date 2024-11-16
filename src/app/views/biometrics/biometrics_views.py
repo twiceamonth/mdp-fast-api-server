@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, UploadFile, File
 from src.app.db.db_connection import session as db
 
-from app.views.biometrics.crud import get_biometrics_by_employee_id, upload_biometrics_by_employee_id, \
+from src.app.views.biometrics.crud import get_biometrics_by_employee_id, upload_biometrics_by_employee_id, \
     delete_biometrics_by_id
 from src.app.views.biometrics.model import BiometricsResponse
 

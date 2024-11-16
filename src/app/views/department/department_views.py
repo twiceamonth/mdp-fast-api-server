@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter
 from src.app.db.db_connection import session as db
 
-from app.views.department.crud import get_departments, create_new_department, delete_department_by_id, \
+from src.app.views.department.crud import get_departments, create_new_department, delete_department_by_id, \
     update_department_patch
 from src.app.views.department.model import DepartmentResponse, Department
 

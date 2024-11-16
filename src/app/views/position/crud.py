@@ -3,9 +3,9 @@ from sqlalchemy import select, Result
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_404_NOT_FOUND
 
-from app.db.base import convert_to_db
-from app.db.models.position import PositionDTO
-from app.views.position.model import Position, PositionResponse
+from src.app.db.base import convert_to_db
+from src.app.db.models.position import PositionDTO
+from src.app.views.position.model import Position, PositionResponse
 
 
 def get_positions(session: Session) -> list[PositionResponse]:

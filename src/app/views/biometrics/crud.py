@@ -9,9 +9,9 @@ from sqlalchemy import select, Result
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_404_NOT_FOUND
 
-from app.db.base import check_uuid, convert_to_db
-from app.db.models.biometrics import BiometricsDTO
-from app.views.biometrics.model import BiometricsResponse, Biometrics
+from src.app.db.base import check_uuid, convert_to_db
+from src.app.db.models.biometrics import BiometricsDTO
+from src.app.views.biometrics.model import BiometricsResponse, Biometrics
 
 
 def get_biometrics_by_employee_id(session: Session, employee_id: str) -> list[BiometricsResponse]:

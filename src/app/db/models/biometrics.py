@@ -1,7 +1,7 @@
 from sqlalchemy import Column, UUID, text, Date, Text, ForeignKey
 from sqlalchemy.orm import relationship
 
-from app.db.models.employee import EmployeeDTO
+from src.app.db.models.employee import EmployeeDTO
 from src.app.db.base import Base
 
 

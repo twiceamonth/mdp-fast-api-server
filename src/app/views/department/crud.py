@@ -3,9 +3,9 @@ from sqlalchemy import select, Result
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_404_NOT_FOUND
 
-from app.db.base import check_uuid, convert_to_db
-from app.db.models.department import DepartmentDTO
-from app.views.department.model import DepartmentResponse, Department
+from src.app.db.base import check_uuid, convert_to_db
+from src.app.db.models.department import DepartmentDTO
+from src.app.views.department.model import DepartmentResponse, Department
 
 
 def get_departments(session: Session) -> list[DepartmentResponse]:

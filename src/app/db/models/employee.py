@@ -1,8 +1,7 @@
 from sqlalchemy import Column, ForeignKey, text, UUID, String, Text
-from sqlalchemy.orm import relationship
 
-from app.db.models.department import DepartmentDTO
-from app.db.models.position import PositionDTO
+from src.app.db.models.department import DepartmentDTO
+from src.app.db.models.position import PositionDTO
 from src.app.db.base import Base
 
 

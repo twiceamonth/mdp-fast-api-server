@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from app.views.position.crud import create_new_position, get_positions, delete_position_by_id, update_position_patch
+from src.app.views.position.crud import create_new_position, get_positions, delete_position_by_id, update_position_patch
 from src.app.views.position.model import PositionResponse, Position
 from src.app.db.db_connection import session as db
 
