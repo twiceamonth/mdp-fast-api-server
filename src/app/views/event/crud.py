@@ -34,7 +34,7 @@ def update_event_patch(
 ) -> EventResponse:
     check_uuid(event_id)
     new_event.model_dump(exclude_unset=True)
-    old_event = get_event(session, event_id)
+    old_event = session.get(EventDTO, event_id)
     if old_event is not None:
         for name, value in new_event.model_dump(exclude_unset=True).items():
             setattr(old_event, name, value)
