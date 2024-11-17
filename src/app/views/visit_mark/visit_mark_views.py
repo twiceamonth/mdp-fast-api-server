@@ -2,18 +2,22 @@ from typing import List
 
 from fastapi import APIRouter, UploadFile, File
 
+from src.app.views.visit_mark.crud import get_visit_marks_for_visit
+from src.app.views.visit_mark.crud import create_visit_new_mark
+from src.app.views.visit_mark.crud import delete
+from src.app.db.db_connection import session as db
 from src.app.views.visit_mark.model import VisitMarkResponse
 
 router = APIRouter(tags=["Временные отметки о посещении"])
 
-@router.get("/visit-marks")
+@router.get("/visit-marks", response_model=list[VisitMarkResponse])
 def get_visit_marks_list_for_visit(visit_id: str) -> List[VisitMarkResponse]:
-    return []
+    return get_visit_marks_for_visit(db, visit_id)
 
-@router.post("/visit-marks")
+@router.post("/visit-marks", response_model=VisitMarkResponse)
 def create_visit_mark(visit_id: str, file: UploadFile = File()):
-    return {}
+    return create_visit_new_mark(db, visit_id, file)
 
 @router.delete("/visitmarks/{mark_id}")
 def delete_visit_marks(mark_id: str):
-    return []
+    return delete(db, mark_id)
