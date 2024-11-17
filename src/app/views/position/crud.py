@@ -3,6 +3,7 @@ from sqlalchemy import select, Result
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_404_NOT_FOUND
 
+from src.app.db.base import check_uuid
 from src.app.db.base import convert_to_db
 from src.app.db.models.position import PositionDTO
 from src.app.views.position.model import Position, PositionResponse
@@ -22,6 +23,7 @@ def create_new_position(session: Session,new_position: Position):
     return sao
 
 def delete_position_by_id(session: Session, position_id: str):
+    check_uuid(position_id)
     position = session.get(PositionDTO, position_id)
     if position is not None:
         session.delete(position)
@@ -33,6 +35,7 @@ def delete_position_by_id(session: Session, position_id: str):
     )
 
 def update_position_patch(session: Session, position_id: str, new_position: Position) -> PositionResponse:
+    check_uuid(position_id)
     new_position.model_dump(exclude_unset=True)
     old_position = session.get(PositionDTO, position_id)
     if old_position is not None:

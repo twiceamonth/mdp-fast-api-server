@@ -1,11 +1,15 @@
-from pydantic import BaseModel
+from uuid import UUID
+
+from pydantic import BaseModel, ConfigDict
 
 
 class VisitResponse(BaseModel):
-    visit_id: str
-    employee_id: str
-    event_id: str
+    model_config = ConfigDict(from_attributes=True)
+    visit_id: UUID
+    employee_id: UUID
+    event_id: UUID
 
 class Visit(BaseModel):
-    employee_id: str
-    event_id: str
+    model_config = ConfigDict(from_attributes=True)
+    employee_id: UUID
+    event_id: UUID
