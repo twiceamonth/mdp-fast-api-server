@@ -33,14 +33,14 @@ git clone https://github.com/twiceamonth/mdp-rest-server.git
 http://localhost:8000/
 ```
 
+Для того чтобы запросы проходили сначала нужно обязательно зарегестрироваться, или использовать уже созданного тестового пользователя ```login:string password:string```.
+Ендпоинт ```/login``` вернет токен и тип токена, далее к каждому запросу нужно добавлять следующий заголовок:
+```commandline
+"Authorization" : "Bearer <YOUR_TOKEN>" 
+```
+
 Документация доступна по адресу:
 
 ```commandline
 http://localhost:8000/docs
-```
-
-Если стрктура базы данных не создалась, в папке с проектом есть файл ```mdp-clear.sql```, это образ базы данных с пустыми таблицами. Чтобы загрузить бекам в контейнер необходимо выполнить в терминале следующую команду:
-
-```commandline
-type mdp-clear.sql | docker exec -i mdp-db psql -U postgres -d postgres
 ```

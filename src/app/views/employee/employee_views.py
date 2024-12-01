@@ -1,8 +1,9 @@
 import json
 from typing import List
 
-from fastapi import APIRouter, UploadFile, File, Form
+from fastapi import APIRouter, UploadFile, File, Form, Depends
 
+from src.app.views.auth.crud import oauth2_scheme
 from src.app.views.employee.crud import update_employee_patch
 from src.app.views.employee.model import EmployeePatch
 from src.app.views.employee.crud import delete
@@ -15,7 +16,7 @@ from src.app.views.employee.model import EmployeeResponse, Employee
 
 router = APIRouter(tags=["Сотрудники"])
 
-@router.get("/employees", response_model=list[EmployeeResponse])
+@router.get("/employees", response_model=List[EmployeeResponse], dependencies=[Depends(oauth2_scheme)])
 def get_employees_list() -> List[EmployeeResponse]:
     return get_employees(db)
 
@@ -23,17 +24,17 @@ def get_employees_list() -> List[EmployeeResponse]:
 def get_employee_by_id(employee_id: str) -> EmployeeResponse:
     return get_employee(db, employee_id)
 
-@router.post("/employee", response_model=EmployeeResponse)
+@router.post("/employee", response_model=EmployeeResponse, dependencies=[Depends(oauth2_scheme)])
 def create_employee(employee: str = Form(media_type = "application/json"), photo: UploadFile = File()) -> EmployeeResponse:
     employee_data = json.loads(employee)
     employee_model = Employee(**employee_data)
     return create_new_employee(db, employee_model, photo)
 
-@router.delete("/employee/{employee_id}")
+@router.delete("/employee/{employee_id}", dependencies=[Depends(oauth2_scheme)])
 def delete_employee(employee_id: str):
     return delete(db, employee_id)
 
-@router.patch("/employee/{employee_id}", response_model=EmployeeResponse)
+@router.patch("/employee/{employee_id}", response_model=EmployeeResponse, dependencies=[Depends(oauth2_scheme)])
 def update_employee(employee_id: str, new_employee: str = Form(media_type = "application/json"), photo: UploadFile| None = None ) -> EmployeeResponse:
     employee_data = json.loads(new_employee)
     employee_model = EmployeePatch(**employee_data)
