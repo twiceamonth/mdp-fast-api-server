@@ -12,5 +12,5 @@ class VisitDTO(Base):
         primary_key=True,
         server_default=text("nextval('visit_id_seq'::regclass)"),
     )
-    employee_id = Column(ForeignKey("mdp.Employee.employee_id"), nullable=False)
+    employee_id = Column(ForeignKey("mdp.Employee.employee_id"), nullable=True)
     event_id = Column(ForeignKey("mdp.Event.event_id"), nullable=False)
