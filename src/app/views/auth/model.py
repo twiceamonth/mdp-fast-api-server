@@ -19,3 +19,8 @@ class UserResponse(BaseModel):
     class Config:
         orm_mode = True  # This allows Pydantic to read data from SQLAlchemy models
 
+class LoginResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    access_token: str
+    token_type: str
+
