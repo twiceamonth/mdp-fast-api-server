@@ -31,4 +31,4 @@ def login(user: UserCreate):
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token = create_access_token(data={"sub": db_user.login})
-    return LoginResponse(access_token, "Bearer")
+    return { "access_token": access_token, "token_type" : "Bearer"}
