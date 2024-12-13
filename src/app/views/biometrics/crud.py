@@ -1,8 +1,6 @@
 import os
 import uuid
-from random import Random
 from typing import List
-from uuid import UUID
 
 from fastapi import UploadFile, File, HTTPException
 from sqlalchemy import select, Result
@@ -16,6 +14,12 @@ from src.app.views.biometrics.model import BiometricsResponse, Biometrics
 
 def get_biometrics_by_employee_id(session: Session, employee_id: str) -> list[BiometricsResponse]:
     q = select(BiometricsDTO).where(BiometricsDTO.employee_id == employee_id).order_by(BiometricsDTO.upload_date)
+    result: Result = session.execute(q)
+    biometrics = result.scalars().all()
+    return [BiometricsResponse.model_validate(b) for b in biometrics]
+
+def get_all_biometrics(session: Session) -> list[BiometricsResponse]:
+    q = select(BiometricsDTO)
     result: Result = session.execute(q)
     biometrics = result.scalars().all()
     return [BiometricsResponse.model_validate(b) for b in biometrics]

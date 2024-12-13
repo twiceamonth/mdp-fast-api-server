@@ -5,7 +5,9 @@ from sqlalchemy import select, Result
 from sqlalchemy.orm import Session
 from starlette.responses import FileResponse
 from starlette.status import HTTP_404_NOT_FOUND
+import requests
 
+from src.app.views.biometrics.crud import get_all_biometrics
 from src.app.db.base import convert_to_db, check_uuid
 from src.app.db.models.event import EventDTO
 from src.app.views.event.model import EventResponse, Event, EventPatch
@@ -80,6 +82,7 @@ def upload_video(session: Session, event_id: str, video: UploadFile = File()):
         video.file.close()
         update_event_patch(session, event_id, EventPatch(event_video=response_path))
         session.commit()
+        send_to_ai_request(session, event_id)
         return event
     raise HTTPException(
         status_code=HTTP_404_NOT_FOUND,
@@ -105,3 +108,12 @@ def download_video(session: Session, event_id: str):
         status_code=HTTP_404_NOT_FOUND,
         detail=f"Мероприятия с id {event_id} не найдено!",
     )
+
+
+def send_to_ai_request(session: Session, event_id: str):
+    biometrics = get_all_biometrics(session)
+    requests.get("http://localhost:8001/startAI",
+                 {
+                     "event_id" : event_id,
+                     "biometrics" : biometrics
+                 })

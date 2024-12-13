@@ -12,7 +12,7 @@ from src.app.db.models.users import UserDTO
 
 SECRET_KEY = "6fae1ef0cfecd0dca91324cf854c4730f335ded08c6b4686264a85688e470faa"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 1440
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")

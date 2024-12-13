@@ -3,6 +3,12 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 
+from src.app.views.biometrics.model import BiometricsResponse
+
+
+class StartAiModel:
+    event_id: str
+    biometrics: list[BiometricsResponse]
 
 class Event(BaseModel):
     model_config = ConfigDict(from_attributes=True)
