@@ -1,6 +1,9 @@
-from pydantic import BaseModel
+from uuid import UUID
+
+from pydantic import BaseModel, ConfigDict
 
 
 class InvitationResponse(BaseModel):
-    event_id: str
-    employee_id: str
+    model_config = ConfigDict(from_attributes=True)
+    event_id: UUID
+    employee_id: UUID

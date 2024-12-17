@@ -10,12 +10,14 @@ from src.app.views.invitation.invitation_views import router as invitation_route
 from src.app.views.position.position_views import router as position_router
 from src.app.views.visit_mark.visit_mark_views import router as visit_mark_router
 from src.app.views.visit.visit_views import router as visit_router
+from src.app.views.auth.auth_views import router as auth_router
+from src.app.views.reports.reports_views import router as report_router
 
 app = FastAPI()
 
-app.mount("/biometrics", StaticFiles(directory="src/app/static_files/biometrics"), name="biometrics")
-app.mount("/photos", StaticFiles(directory="src/app/static_files/photos"), name="photos")
-app.mount("/videos", StaticFiles(directory="src/app/static_files/videos"), name="videos")
+app.mount("/biometrics-static", StaticFiles(directory="src/app/static_files/biometrics"), name="biometrics")
+app.mount("/photos-static", StaticFiles(directory="src/app/static_files/photos"), name="photos")
+app.mount("/videos-static", StaticFiles(directory="src/app/static_files/videos"), name="videos")
 
 app.include_router(event_router)
 app.include_router(employee_router)
@@ -25,6 +27,8 @@ app.include_router(invitation_router)
 app.include_router(position_router)
 app.include_router(visit_mark_router)
 app.include_router(visit_router)
+app.include_router(auth_router)
+app.include_router(report_router)
 
 
 if __name__ == "__main__":

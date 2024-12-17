@@ -17,10 +17,8 @@ class EmployeeDTO(Base):
     second_name = Column(String(100))
     patronymic = Column(String(100), nullable=True)
     employee_photo = Column(Text)
-    department_id = Column(ForeignKey("Department.department_id"), nullable=False)
-    position_id = Column(ForeignKey("Position.position_id"), nullable=False)
+    department_id = Column(UUID, ForeignKey("mdp.Department.department_id"), nullable=False)
+    position_id = Column(UUID, ForeignKey("mdp.Position.position_id"), nullable=False)
 
-    position = relationship("Position")
-    # , primaryjoin="Employee.position_id == Position.position_id"
-    department = relationship("Department")
-    # , primaryjoin="Employee.department_id == Department.department_id"
+    position = relationship("PositionDTO", back_populates="employees")
+    department = relationship("DepartmentDTO", back_populates="employees")

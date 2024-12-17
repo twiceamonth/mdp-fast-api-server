@@ -29,7 +29,7 @@ def check_uuid(uuid: str):
 
 def convert_to_db(pydantic_model: BaseModel, sqlalchemy_model_class: Type[Base]):
     # Получаем словарь данных из Pydantic модели
-    data = pydantic_model.dict()
+    data = pydantic_model.model_dump()
 
     # Проходим по всем полям SQLAlchemy модели и заполняем их значениями из Pydantic модели
     sqlalchemy_model = sqlalchemy_model_class()

@@ -1,5 +1,5 @@
-from click import UUID
-from sqlalchemy import Column, text, Text
+from sqlalchemy import Column, text, Text, UUID
+from sqlalchemy.orm import relationship
 
 from src.app.db.base import Base
 
@@ -14,3 +14,5 @@ class DepartmentDTO(Base):
         server_default=text("nextval('department_id_seq'::regclass)"),
     )
     name = Column(Text)
+
+    employees = relationship("EmployeeDTO", back_populates="department")
