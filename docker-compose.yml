@@ -50,8 +50,8 @@ services:
       - POSTGRES_DB=postgres
       - DATABASE_URL=postgresql://postgres:12345@mdp-db:5432/postgres
     volumes:
-      - db-data:/var/lib/postgresql/data
       - ./mdp-rest-server/init.sql/mdp-clear.sql:/docker-entrypoint-initdb.d/mdp-clear.sql
+      - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     expose:
