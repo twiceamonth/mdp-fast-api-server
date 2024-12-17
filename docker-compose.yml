@@ -1,10 +1,30 @@
 version: "3.9"
 
 services:
+  mdp-web-app:
+    container_name: mdp-web-app
+    build:
+      context: ./NST-front
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mdp-rest-app
+
+  mdp-ai-app:
+    container_name: mdp-ai-app
+    build:
+      context: ./MDP_NEURON
+      dockerfile: Dockerfile-AI
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mdp-rest-app
+
   mdp-rest-app:
     container_name: mdp-rest-app
     build:
-      context: .
+      context: ./mdp-rest-server
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
@@ -29,7 +49,7 @@ services:
       - DATABASE_URL=postgresql://postgres:12345@mdp-db:5432/postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./init.sql/mdp-clear.sql:/docker-entrypoint-initdb.d/mdp-with-test-data.sql
+      - ./mdp-rest-server/init.sql/mdp-with-test-data.sql:/docker-entrypoint-initdb.d/mdp-with-test-data.sql
     ports:
       - "5432:5432"
     expose:
