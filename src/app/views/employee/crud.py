@@ -83,10 +83,10 @@ def update_employee_patch(session: Session, employee_id: str, new_employee: Empl
             response_path = f"photos-static/{employee_id}.{ext}"
             contents = photo.file.read()
 
-            for file in os.listdir("static_files/photos"):
+            for file in os.listdir("src/app/static_files/photos/"):
                 filename = file.split(".")
                 if (filename[0] == employee_id):
-                    os.remove(f"static_files/photos/{filename[0]}.{filename[1]}")
+                    os.remove(f"src/app/static_files/photos/{filename[0]}.{filename[1]}")
             with open(path, "wb") as f:
                 f.write(contents)
             photo.file.close()
