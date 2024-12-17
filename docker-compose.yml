@@ -40,7 +40,7 @@ services:
       - DATABASE_URL=postgresql://postgres:12345@mdp-db:5432/postgres
 
   mdp-db:
-    image: postgres:latest
+    image: postgres:16
     container_name: mdp-db
     user: postgres
     restart: always
