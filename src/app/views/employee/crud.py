@@ -36,7 +36,7 @@ def get_employee(session: Session, employee_id: str) -> EmployeeResponse:
 def create_new_employee(session: Session, new_employee: Employee, photo: UploadFile = File()) -> EmployeeResponse:
     ext = photo.filename.split(".")[-1]
     employee_new_id = uuid.uuid4()
-    path = f"static_files/photos/{employee_new_id}.{ext}"
+    path = f"src/app/static_files/photos/{employee_new_id}.{ext}"
     response_path = f"photos-static/{employee_new_id}.{ext}"
 
     contents = photo.file.read()
@@ -79,7 +79,7 @@ def update_employee_patch(session: Session, employee_id: str, new_employee: Empl
     if old_employee is not None:
         if photo is not None:
             ext = photo.filename.split(".")[-1]
-            path = f"static_files/photos/{employee_id}.{ext}"
+            path = f"src/app/static_files/photos/{employee_id}.{ext}"
             response_path = f"photos-static/{employee_id}.{ext}"
             contents = photo.file.read()
 

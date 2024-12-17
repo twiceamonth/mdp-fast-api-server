@@ -29,7 +29,7 @@ def upload_biometrics_by_employee_id(session: Session, employee_id: str, files: 
     for file in files:
         ext = file.filename.split(".")[-1]
         file_new_uuid = uuid.uuid4()
-        path = f"static_files/biometrics/{file_new_uuid}.{ext}"
+        path = f"src/app/static_files/biometrics/{file_new_uuid}.{ext}"
         response_path = f"biometrics-static/{file_new_uuid}.{ext}"
         contents = file.file.read()
         with open(path, "wb") as f:
@@ -44,10 +44,10 @@ def upload_biometrics_by_employee_id(session: Session, employee_id: str, files: 
 
 def delete_biometrics_by_id(session: Session, photo_id: str):
     check_uuid(photo_id)
-    for file in os.listdir("static_files/biometrics"):
+    for file in os.listdir("src/app/static_files/biometrics"):
         file_name = file.split(".")
         if(file_name[0] == photo_id):
-            os.remove(f"static_files/biometrics/{file_name[0]}.{file_name[1]}")
+            os.remove(f"src/app/static_files/biometrics/{file_name[0]}.{file_name[1]}")
             bio = session.get(BiometricsDTO, photo_id)
             session.delete(bio)
             session.commit()

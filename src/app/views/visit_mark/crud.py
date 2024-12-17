@@ -22,7 +22,7 @@ def create_visit_new_mark(session: Session, visit_id: str, file: UploadFile = Fi
     check_uuid(visit_id)
     ext = file.filename.split(".")[-1]
     mark_new_id = uuid.uuid4()
-    path = f"static_files/photos/{mark_new_id}.{ext}"
+    path = f"src/app/static_files/photos/{mark_new_id}.{ext}"
     response_path = f"photos-static/{mark_new_id}.{ext}"
 
     contents = file.file.read()

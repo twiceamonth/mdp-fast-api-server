@@ -74,7 +74,7 @@ def upload_video(session: Session, event_id: str, video: UploadFile = File()):
     event = get_event(session, event_id)
     if event is not None:
         ext = video.filename.split(".")[-1]
-        path = f"static_files/videos/{event_id}.{ext}"
+        path = f"src/app/static_files/videos/{event_id}.{ext}"
         response_path = f"videos-static/{event_id}.{ext}"
         contents = video.file.read()
         with open(path, "wb") as f:
@@ -92,7 +92,7 @@ def upload_video(session: Session, event_id: str, video: UploadFile = File()):
 
 def download_video(session: Session, event_id: str):
     check_uuid(event_id)
-    for file in os.listdir("static_files/videos"):
+    for file in os.listdir("src/app/static_files/videos"):
         file_name, file_extension = file.split(".")
         if file_name == event_id:
             return FileResponse(
@@ -112,7 +112,7 @@ def download_video(session: Session, event_id: str):
 
 def send_to_ai_request(session: Session, event_id: str):
     biometrics = get_all_biometrics(session)
-    requests.get("http://localhost:8001/startAI",
+    requests.get("http://mdp-ai-app:8001/startAI",
                  {
                      "event_id" : event_id,
                      "biometrics" : biometrics
